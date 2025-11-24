@@ -20,7 +20,11 @@ dotenv.config();
 
 // Set up CORS -> Communication between frontend and backend even when they run on different addresses
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: process.env.CORS_ORIGIN // Set Cors origin to either local URL (e.g. http://localhost:5173) or to railway env variable
+}
+
+));
 app.use(express.json());
 
 console.log('🚀 Research Agent mit Conditional Routing startet...');
@@ -372,6 +376,9 @@ app.get('/api/reports', async (req, res) => {
 
 app.get('/health', (req, res) => res.json({ status: 'OK' }));
 
-app.listen(3001, () => {
-    console.log('✅ Server running on http://localhost:3001');
+// Server listens on env variable PORT or on 3001
+const PORT = process.env.PORT || 3001; //
+
+app.listen(PORT, () => {
+    console.log('✅ Server running on port ${PORT}');
 });
