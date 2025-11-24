@@ -9,11 +9,7 @@ import dotenv from 'dotenv';
 import { StateGraph, Annotation, END } from '@langchain/langgraph';
 import { ChatOpenAI } from '@langchain/openai';
 import { TavilySearch } from '@langchain/tavily';
-
-//import { Client as AppwriteClient, Databases, ID } from 'node-appwrite';
 import { Client as AppwriteClient, Databases, ID, Query } from 'node-appwrite';
-//import sdk from 'node-appwrite';
-//const { Client: AppwriteClient, Databases, ID, Query } = sdk;
 
 // SYSTEM SETUP LAYER
 dotenv.config();
@@ -138,17 +134,6 @@ async function searchNode(state) {
     }
 
     console.log(`🔍 Suche: "${searchQuery}"`);
-
-    /*try {
-        const results = await tavilyTool.invoke({ query: searchQuery }); // ✅ key fix
-        console.log('✅ Tavily results (kurzer Ausschnitt):', JSON.stringify(results).slice(0, 300));
-        return { searchResults: results };
-    } catch(err) {
-        console.error('❌ Tavily error raw:', err);
-        // if it’s a Zod error, you often get more detail here:
-        console.error('❌ Tavily inner cause:', err?.cause);
-        throw err;
-    }*/
 
     //const results = await tavilyTool.invoke(searchQuery); //standard version
     const results = await tavilyTool.invoke({ query: searchQuery }); //Version from documentation
