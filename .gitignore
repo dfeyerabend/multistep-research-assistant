@@ -25,9 +25,10 @@ dist-ssr
 
 # Backend
 Backend/.env
-Backend/node_modules
 Backend/.gitignore
+Backend/node_modules
 
 # Frontend
-Frontend/node_modules
+Frontend/.env
 Frontend/.gitignore
+Frontend/node_modules

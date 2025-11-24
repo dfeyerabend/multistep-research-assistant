@@ -31,9 +31,12 @@ function App() {
         }
     }, [view]);
 
+    // If .env is missing, it falls back to http://localhost:3001
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+
     const loadReports = async () => {
         try {
-            const res = await fetch(`http://localhost:3001/api/reports?userId=${userId}`);
+            const res = await fetch(`${API_URL}/api/reports?userId=${userId}`);
             const data = await res.json();
             setReports(data.reports || []);
         } catch (error) {
@@ -50,7 +53,7 @@ function App() {
         setLoading(true);
 
         try {
-            const res = await fetch('http://localhost:3001/api/research', {
+            const res = await fetch(`${API_URL}/api/research`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ userId, query: input })
